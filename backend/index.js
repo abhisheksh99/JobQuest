@@ -3,7 +3,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
-
+import userRoutes from "./routes/userRoutes.js"
 // Load environment variables from .env file
 dotenv.config({});
 
@@ -29,6 +29,10 @@ const corsOptions = {
 
 // Enable CORS with the specified options
 app.use(cors(corsOptions));
+
+
+//Api routes
+app.use("/api/v1/user", userRoutes);
 
 // Set the port for the server to listen on
 const PORT = process.env.PORT || 3000;
