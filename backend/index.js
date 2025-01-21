@@ -41,13 +41,12 @@ app.use(cors(corsOptions));
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/company", companyRoutes);
 app.use("/api/v1/job", jobRoutes);
-app.use("/api/v1/application", jobRoutes);
+app.use("/api/v1/application", applicationRoutes);
 
 // Set the port for the server to listen on
 const PORT = process.env.PORT || 3000;
 
 // Start the server
 app.listen(PORT,()=>{
-    connectDB(); // Connect to the database again (Note: This might be redundant)
     console.log(`Server running at port ${PORT}`);
 })
