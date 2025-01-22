@@ -6,6 +6,8 @@ import jwt from "jsonwebtoken";
 export const register = async (req, res) => {
   try {
     const { fullName, email, phoneNumber, password, role } = req.body;
+    console.log(fullName, email, phoneNumber, password, role);
+    
     const file = req.file;
 
     //cloudinary
