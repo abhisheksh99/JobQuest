@@ -22,14 +22,26 @@ const Navbar = () => {
         </div>
         <div className="flex items-center gap-12">
           <ul className="flex font-medium items-center gap-5">
-            <li>Home</li>
-            <li>Jobs</li>
-            <li>Browse</li>
+            <Link to="/">
+              <li>Home</li>
+            </Link>
+            <Link to="/jobs">
+              <li>Jobs</li>
+            </Link>
+            <Link to="/browse">
+              <li>Browse</li>
+            </Link>
           </ul>
           {!user ? (
             <div className="flex items-center gap-5">
-              <Link to="/login"><Button variant="outline">Login</Button></Link>
-              <Link to="/signup"><Button className="bg-[#6A38C2] hover:bg-[#5b30a6]">Signup</Button></Link>
+              <Link to="/login">
+                <Button variant="outline">Login</Button>
+              </Link>
+              <Link to="/signup">
+                <Button className="bg-[#6A38C2] hover:bg-[#5b30a6]">
+                  Signup
+                </Button>
+              </Link>
             </div>
           ) : (
             <Popover>

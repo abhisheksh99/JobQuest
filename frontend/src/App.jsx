@@ -4,6 +4,8 @@ import Footer from "./components/shared/Footer";
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import Home from "./components/Home";
+import Jobs from "./components/Jobs";
+import Browse from "./components/Browse";
 
 const App = () => {
   return (
@@ -14,6 +16,8 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/jobs" element={<Jobs />} />
+          <Route path="/browse" element={<Browse />} />
         </Routes>
       </div>
       <Footer /> 
