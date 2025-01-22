@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { RadioGroup } from "../ui/radio-group";
@@ -7,6 +7,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import axios from "axios";
 import { USER_API_END_POINT } from "@/utils/constants";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading } from "@/store/slices/authSlice";
+import { Loader2 } from "lucide-react";
 
 const Signup = () => {
   const [input, setInput] = useState({
@@ -18,6 +21,8 @@ const Signup = () => {
     file: "",
   });
   const navigate = useNavigate();
+  const { isLoading, user } = useSelector((store) => store.auth);
+  const dispatch = useDispatch();
 
   const changeEventHandler = (e) => {
     const { name, value } = e.target;
@@ -41,6 +46,7 @@ const Signup = () => {
     }
 
     try {
+      dispatch(setLoading(true));
       const response = await axios.post(
         `${USER_API_END_POINT}/register`,
         formData,
@@ -51,13 +57,20 @@ const Signup = () => {
       );
       if (response.data.success) {
         navigate("/login");
-        toast.success(res.data.message);
+        toast.success(response.data.message);
       }
     } catch (error) {
-      console.log(error);
-      toast.error(error.response.data.message);
+      toast.error(error.response?.data?.message || "Something went wrong");
+    } finally {
+      dispatch(setLoading(false));
     }
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user, navigate]);
 
   return (
     <div className="flex items-center justify-center max-w-7xl mx-auto">
@@ -141,9 +154,15 @@ const Signup = () => {
             />
           </div>
         </div>
-        <Button type="submit" className="w-full my-4">
-          Signup
-        </Button>
+        {isLoading ? (
+          <Button className="w-full my-4">
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait
+          </Button>
+        ) : (
+          <Button type="submit" className="w-full my-4">
+            Signup
+          </Button>
+        )}
         <div className="w-full flex justify-center">
           <span className="text-sm text-center">
             Already have an account?{" "}
