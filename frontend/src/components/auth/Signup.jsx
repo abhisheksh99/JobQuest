@@ -4,8 +4,9 @@ import { Label } from "../ui/label";
 import { RadioGroup } from "../ui/radio-group";
 import { Button } from "../ui/button";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from 'sonner'
+import { toast } from "sonner";
 import axios from "axios";
+import { USER_API_END_POINT } from "@/utils/constants";
 
 const Signup = () => {
   const [input, setInput] = useState({
@@ -30,7 +31,7 @@ const Signup = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("fullname", input.fullname);
+    formData.append("fullName", input.fullName);
     formData.append("email", input.email);
     formData.append("phoneNumber", input.phoneNumber);
     formData.append("password", input.password);
@@ -40,17 +41,21 @@ const Signup = () => {
     }
 
     try {
-      const response = await axios.post(`${USER_API_END_POINT}/register`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-        withCredentials: true,
-      });
-      if(response.data.success){
-        toast.success(res.data.message);
+      const response = await axios.post(
+        `${USER_API_END_POINT}/register`,
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+          withCredentials: true,
+        }
+      );
+      if (response.data.success) {
         navigate("/login");
-
+        toast.success(res.data.message);
       }
     } catch (error) {
       console.log(error);
+      toast.error(error.response.data.message);
     }
   };
 

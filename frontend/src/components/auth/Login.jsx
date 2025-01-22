@@ -5,7 +5,7 @@ import { RadioGroup } from "../ui/radio-group";
 import { Button } from "../ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import { USER_API_END_POINT } from "@/utils/constants";
-import { toast } from 'sonner'
+import { toast } from "sonner";
 import axios from "axios";
 
 const Login = () => {
@@ -15,7 +15,7 @@ const Login = () => {
     role: "",
   });
 
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   const changeEventHandler = (e) => {
     const { name, value } = e.target;
@@ -32,12 +32,14 @@ const Login = () => {
         },
         withCredentials: true,
       });
-      if(response.data.success){
-        toast.success(res.data.message);
+      if (response.data.success) {
         navigate("/");
-
+        toast.success(res.data.message);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.message);
+    }
   };
 
   return (
