@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Navbar = () => {
-  const {user} = useSelector(state => state.auth)
+  const { user } = useSelector((state) => state.auth);
   const logoutHandler = () => {
     // Handle logout logic here
     console.log("Logged out");
@@ -74,12 +74,15 @@ const Navbar = () => {
                 <div className="flex flex-col my-2 text-gray-600">
                   <div className="flex w-fit items-center gap-2 cursor-pointer">
                     <User2 />
-                    <Button
-                      variant="link"
-                      className="focus-visible:ring-0 focus-visible:ring-offset-0"
-                    >
-                      View Profile
-                    </Button>
+                    <Link to="/profile">
+                      {" "}
+                      <Button
+                        variant="link"
+                        className="focus-visible:ring-0 focus-visible:ring-offset-0"
+                      >
+                        View Profile
+                      </Button>
+                    </Link>
                   </div>
 
                   <div className="flex w-fit items-center gap-2 cursor-pointer">
