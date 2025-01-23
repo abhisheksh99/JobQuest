@@ -79,14 +79,14 @@ const Navbar = () => {
                 <div className="flex gap-4 space-y-2">
                   <Avatar className="cursor-pointer">
                     <AvatarImage
-                      src="https://github.com/shadcn.png"
+                      src={user?.profile?.profilePhoto}
                       alt="@shadcn"
                     />
                   </Avatar>
                   <div>
-                    <h4 className="font-medium">Abhishek</h4>
+                    <h4 className="font-medium">{user?.fullName}</h4>
                     <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                      {user?.profile?.bio}
                     </p>
                   </div>
                 </div>
